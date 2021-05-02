@@ -27,10 +27,10 @@ class L298N( object ):
  
   @speed.setter
   def speed( self, value ) :
-    if value < minpwm :
-      value = minpwm
-    if value > maxpwm :
-      value = maxpwm
+    if value < self.minpwm :
+      value = self.minpwm
+    if value > self.maxpwm :
+      value = self.maxpwm
 
     if value >= 0 :
       if self._speed < 0:
