@@ -3,8 +3,8 @@ import socket
 import ure
 import time
 
-ap_ssid = "ESP32_CAR"
-ap_password = "esp32car"
+ap_ssid = "macanumdrive"
+ap_password = "macanumdrive"
 ap_authmode = 3  # WPA2
 
 NETWORK_PROFILES = 'wifi.dat'

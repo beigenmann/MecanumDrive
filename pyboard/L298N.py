@@ -3,6 +3,7 @@ import machine
 
 class L298N( object ):
   maxpwm = 1023
+  minpwm = -1023
 
   def __init__( self, pin2, pin1) :
     self._pwm_forward = machine.PWM(machine.Pin(pin1))
@@ -26,6 +27,11 @@ class L298N( object ):
  
   @speed.setter
   def speed( self, value ) :
+    if value < minpwm :
+      value = minpwm
+    if value > maxpwm :
+      value = maxpwm
+
     if value >= 0 :
       if self._speed < 0:
         print ("Bw 0")
