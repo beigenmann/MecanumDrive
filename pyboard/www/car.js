@@ -65,22 +65,25 @@ function SendMsg(msg) {
 }
 window.addEventListener("load", init, false);
 // Create JoyStick object into the DIV 'joy1Div'
-var Joy1 = new JoyStick('joy1Div');
+var joy1Param = { "title": "joystick1", "autoReturnToCenter": true };
+var Joy1 = new JoyStick('joy1Div', joy1Param);
 
-var joy1Direzione = document.getElementById("joy1Direzione");
-var joy1X = document.getElementById("joy1X");
-var joy1Y = document.getElementById("joy1Y");
+// Create JoyStick object into the DIV 'joy2Div'
+var joy2Param = { "title": "joystick2", "autoReturnToCenter": true };
+var Joy2 = new JoyStick('joy2Div', joy2Param);
+
 
 setInterval(function () {
   //https://seamonsters-2605.github.io/archive/mecanum/
   var x = Number(Joy1.GetX());
+  var rot = Number(Joy2.GetX());
   var y = Number(Joy1.GetY());
   var r = Math.hypot(x, y);
   var robotAngle = Math.atan2(y, x) ;
   var _sin_vrhl = Math.sin(robotAngle + Math.PI / 4); 
   var _sin_vlhr = Math.sin(robotAngle - Math.PI / 4);
-  vlhr = (r * _sin_vrhl).toFixed();
-  vrhl = (r * _sin_vlhr).toFixed();
+  vlhr = (r * _sin_vrhl).toFixed() + rot;
+  vrhl = (r * _sin_vlhr).toFixed() - rot;
   var vl = vlhr;
   var vr = vrhl;
   var hl = vrhl;
@@ -88,7 +91,4 @@ setInterval(function () {
   websocket.send('{ "vr": ' +  vr + ',"vl":' + vl + ',"hr":' + hr +',"hl":'+ hl + '}');
 }, 50);
 
-// Create JoyStick object into the DIV 'joy2Div'
-var joy2Param = { "title": "joystick2", "autoReturnToCenter": false };
-var Joy2 = new JoyStick('joy2Div', joy2Param);
 
