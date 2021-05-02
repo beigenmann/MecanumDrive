@@ -6,7 +6,7 @@ function init() {
 function startWebSocket() {
   var wsUri = "ws://" + window.location.hostname;
  //var wsUri = "ws://espressif.lan";
-  //var wsUri = "ws://10.10.0.153";
+  //var wsUri = "ws://192.168.4.1";
   console.log("Connection to " + wsUri + "...");
   websocket = new WebSocket(wsUri);
   websocket.onopen = function (evt) {

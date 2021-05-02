@@ -170,11 +170,13 @@ def _closedCallback(webSocket):
 # 	( "/test",	"GET",	_httpHandlerTestGet ),
 # 	( "/test",	"POST",	_httpHandlerTestPost )
 # ]
+print("Start websrv")
 srv = MicroWebSrv(webPath="www/")
 srv.MaxWebSocketRecvLen = 256
 srv.WebSocketThreaded = True
 srv.AcceptWebSocketCallback = _acceptWebSocketCallback
 srv.Start(threaded=True)
+print("websrv is up")
 
 
 # ----------------------------------------------------------------------------
