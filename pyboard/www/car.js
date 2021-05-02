@@ -76,19 +76,19 @@ var Joy2 = new JoyStick('joy2Div', joy2Param);
 setInterval(function () {
   //https://seamonsters-2605.github.io/archive/mecanum/
   var x = Number(Joy1.GetX());
-  var rot = Number(Joy2.GetX());
+  //var rot = Number(Joy2.GetX());
   var y = Number(Joy1.GetY());
   var r = Math.hypot(x, y);
   var robotAngle = Math.atan2(y, x) ;
   var _sin_vrhl = Math.sin(robotAngle + Math.PI / 4); 
   var _sin_vlhr = Math.sin(robotAngle - Math.PI / 4);
-  vlhr = (r * _sin_vrhl).toFixed() + rot;
-  vrhl = (r * _sin_vlhr).toFixed() - rot;
+  vlhr = (r * _sin_vrhl).toFixed();
+  vrhl = (r * _sin_vlhr).toFixed();
   var vl = vlhr;
   var vr = vrhl;
   var hl = vrhl;
   var hr = vlhr;
   websocket.send('{ "vr": ' +  vr + ',"vl":' + vl + ',"hr":' + hr +',"hl":'+ hl + '}');
-}, 50);
+}, 100);
 
 

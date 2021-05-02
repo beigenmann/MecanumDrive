@@ -24,26 +24,34 @@ class L298N( object ):
   @property
   def speed( self ) : return self._speed
 
+  def compDCOffset (val):
+    if val == 0 :
+      return 0
+    a = int(val * 0.67 + 300)
+    if a > L298N.maxpwm :
+      return L298N.maxpwm
+    else :
+      return a
  
   @speed.setter
   def speed( self, value ) :
-    if value < self.minpwm :
-      value = self.minpwm
-    if value > self.maxpwm :
-      value = self.maxpwm
+    if value < L298N.minpwm :
+      value = L298N.minpwm
+    if value > L298N.maxpwm :
+      value = L298N.maxpwm
 
     if value >= 0 :
       if self._speed < 0:
         print ("Bw 0")
         self._pwm_backward.duty(0)
       print ("Fw " ,value)
-      self._pwm_forward.duty(value)
+      self._pwm_forward.duty(L298N.compDCOffset(value))
     else :
       if self._speed >= 0:
         print ("Fw 0")
         self._pwm_forward.duty(0)
       print ("Bw " , abs(value))
-      self._pwm_backward.duty(abs(value))
+      self._pwm_backward.duty(L298N.compDCOffset(abs(value)))
 
     self._speed = value
     print ("Speed " , self._speed)
