@@ -12,10 +12,10 @@ else :
 
     ap_ssid = "macanumdrive"
     ap_password = "macanumdrive"
-    ap_authmode = 3  # WPA2
     ap = network.WLAN(network.AP_IF)
     ap.active(True)
     ap.config(essid=ap_ssid, authmode=network.AUTH_WPA_WPA2_PSK, password=ap_password)  
+    print('\nConnected. Network config: ', ap.ifconfig())
 
 
 # Main Code goes here, wlan is a working network.WLAN(STA_IF) instance.
