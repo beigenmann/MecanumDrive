@@ -27,7 +27,7 @@ class L298N( object ):
   def compDCOffset (val):
     if val == 0 :
       return 0
-    a = int(val * 0.67 + 300)
+    a = int(val * 0.2 + 240)
     if a > L298N.maxpwm :
       return L298N.maxpwm
     else :
